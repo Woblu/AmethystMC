@@ -3,14 +3,19 @@ function Footer() {
     <footer className="w-full py-8 px-4" style={{ backgroundColor: '#0a0618' }}>
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
         {/* Woblu Image */}
-        <img 
-          src="/Woblu.png" 
-          alt="Woblu" 
-          className="w-16 h-16 object-contain drop-shadow-lg"
+        <div 
+          className="w-16 h-16 flex items-center justify-center rounded-lg"
           style={{
-            filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))'
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(147, 51, 234, 0.2)',
+            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7))'
           }}
-        />
+        >
+          <img 
+            src="/Woblu.png" 
+            alt="Woblu" 
+            className="w-full h-full object-contain"
+          />
+        </div>
         
         {/* Creator Text */}
         <p className="text-gray-300 text-sm font-medium">
