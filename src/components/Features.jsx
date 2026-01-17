@@ -8,8 +8,8 @@ const features = [
     hasDiagonal: true,
     leftImage: '/modrinth.png',
     rightImage: '/curseforge.png',
-    leftText: 'Modrinth',
-    rightText: 'CurseForge'
+    leftDescription: 'We support Modrinth + CurseForge and more.',
+    rightDescription: 'Access the largest collection of Minecraft mods from multiple platforms in one place.'
   },
   {
     title: 'Java & Bedrock Support',
@@ -18,8 +18,8 @@ const features = [
     hasDiagonal: true,
     leftImage: '/java.png',
     rightImage: '/bedrock.png',
-    leftText: 'Java Edition',
-    rightText: 'Bedrock Edition'
+    leftDescription: 'Play both Java Edition and Bedrock Edition seamlessly.',
+    rightDescription: 'Switch between versions with ease and enjoy the best of both worlds.'
   },
   {
     title: 'Amethyst Client',
@@ -71,37 +71,47 @@ function Features() {
                   <>
                     {/* Diagonal Split Layout */}
                     <div className="relative min-h-[300px] w-full">
-                      {/* Diagonal Line - goes from bottom-left to top-right */}
+                      {/* Diagonal Line - goes from top-left to bottom-right */}
                       <svg
                         className="absolute inset-0 w-full h-full z-20 pointer-events-none"
                         style={{ overflow: 'visible' }}
                       >
                         <line
                           x1="0"
-                          y1="100%"
+                          y1="0"
                           x2="100%"
-                          y2="0"
+                          y2="100%"
                           stroke="rgba(153, 102, 204, 0.6)"
                           strokeWidth="2"
                         />
                       </svg>
 
-                      {/* Left Side - Bottom Triangle */}
+                      {/* Left Side - Top Triangle */}
                       <div 
-                        className="absolute bottom-0 left-0 z-0"
+                        className="absolute top-0 left-0 z-0"
                         style={{
                           width: '100%',
                           height: '100%',
-                          clipPath: 'polygon(0 0, 0 100%, 100% 100%)',
+                          clipPath: 'polygon(0 0, 100% 0, 0 100%)',
                         }}
                       >
+                        {/* Left Description Text */}
+                        <div className="absolute top-3 left-3 z-10 max-w-[45%]">
+                          <p 
+                            className="text-sm leading-relaxed"
+                            style={{ color: '#f5f3f8' }}
+                          >
+                            {feature.leftDescription}
+                          </p>
+                        </div>
+                        
                         {/* Left Image - fills the triangle */}
                         <img
                           src={feature.leftImage}
-                          alt={feature.leftText}
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{
-                            clipPath: 'polygon(0 0, 0 100%, 100% 100%)',
+                            clipPath: 'polygon(0 0, 100% 0, 0 100%)',
                           }}
                           onError={(e) => {
                             e.target.style.display = 'none'
@@ -109,22 +119,32 @@ function Features() {
                         />
                       </div>
 
-                      {/* Right Side - Top Triangle */}
+                      {/* Right Side - Bottom Triangle */}
                       <div 
-                        className="absolute top-0 right-0 z-0"
+                        className="absolute bottom-0 right-0 z-0"
                         style={{
                           width: '100%',
                           height: '100%',
-                          clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
+                          clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
                         }}
                       >
+                        {/* Right Description Text */}
+                        <div className="absolute top-3 right-3 z-10 max-w-[45%] text-right">
+                          <p 
+                            className="text-sm leading-relaxed"
+                            style={{ color: '#f5f3f8' }}
+                          >
+                            {feature.rightDescription}
+                          </p>
+                        </div>
+                        
                         {/* Right Image - fills the triangle */}
                         <img
                           src={feature.rightImage}
-                          alt={feature.rightText}
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{
-                            clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
+                            clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
                           }}
                           onError={(e) => {
                             e.target.style.display = 'none'
@@ -166,24 +186,6 @@ function Features() {
                   }}
                 />
               </div>
-              
-              {/* Text Labels Below Box - only for diagonal features */}
-              {feature.hasDiagonal && (
-                <div className="flex justify-between items-center px-2 pt-3">
-                  <h3 
-                    className="text-lg font-bold"
-                    style={{ color: '#f5f3f8' }}
-                  >
-                    {feature.leftText}
-                  </h3>
-                  <h3 
-                    className="text-lg font-bold"
-                    style={{ color: '#f5f3f8' }}
-                  >
-                    {feature.rightText}
-                  </h3>
-                </div>
-              )}
             </motion.div>
           ))}
         </div>
