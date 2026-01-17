@@ -118,8 +118,8 @@ function Hero() {
 
         {/* Download Button */}
         <motion.a
-          href="https://github.com/Woblu/Amethyst-Launcher/releases/download/v1.0.0/Amethyst.Launcher.Setup.1.0.0.exe"
-          download="Amethyst.Launcher.Setup.1.0.0.exe"
+          href="https://github.com/Woblu/Amethyst-Launcher/releases/download/v1.0.0/Amethyst-Launcher-v1.0.0"
+          download="Amethyst-Launcher-v1.0.0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
