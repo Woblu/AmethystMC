@@ -117,7 +117,9 @@ function Hero() {
         </motion.p>
 
         {/* Download Button */}
-        <motion.button
+        <motion.a
+          href="https://github.com/Woblu/Amethyst-Launcher/releases/download/v1.0.0/Amethyst.Launcher.Setup.1.0.0.exe"
+          download="Amethyst.Launcher.Setup.1.0.0.exe"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -126,10 +128,10 @@ function Hero() {
             boxShadow: '0 0 40px rgba(147, 51, 234, 1)'
           }}
           whileTap={{ scale: 0.95 }}
-          className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold text-lg shadow-[0_0_20px_rgba(147,51,234,0.6)] transition-all duration-300"
+          className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold text-lg shadow-[0_0_20px_rgba(147,51,234,0.6)] transition-all duration-300 cursor-pointer inline-block no-underline"
         >
           Download
-        </motion.button>
+        </motion.a>
 
         {/* Scroll Indicator */}
         <motion.div
