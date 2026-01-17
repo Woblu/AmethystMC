@@ -61,7 +61,7 @@ function Features() {
               className="relative group"
             >
               <div
-                className={`h-full backdrop-blur-md rounded-lg transition-all duration-300 overflow-hidden ${feature.hasDiagonal ? 'p-0' : 'p-6'}`}
+                className={`backdrop-blur-md rounded-lg transition-all duration-300 overflow-hidden ${feature.hasDiagonal ? 'p-0' : 'p-6 h-full'}`}
                 style={{
                   backgroundColor: '#15102c',
                   border: '1px solid rgba(153, 102, 204, 0.2)',
@@ -70,48 +70,38 @@ function Features() {
                 {feature.hasDiagonal ? (
                   <>
                     {/* Diagonal Split Layout */}
-                    <div className="relative h-full min-h-[300px] w-full">
-                      {/* Diagonal Line - goes from corner to corner */}
+                    <div className="relative min-h-[300px] w-full">
+                      {/* Diagonal Line - goes from bottom-left to top-right */}
                       <svg
                         className="absolute inset-0 w-full h-full z-20 pointer-events-none"
                         style={{ overflow: 'visible' }}
                       >
                         <line
                           x1="0"
-                          y1="0"
+                          y1="100%"
                           x2="100%"
-                          y2="100%"
+                          y2="0"
                           stroke="rgba(153, 102, 204, 0.6)"
                           strokeWidth="2"
                         />
                       </svg>
 
-                      {/* Left Side - Top Triangle */}
+                      {/* Left Side - Bottom Triangle */}
                       <div 
-                        className="absolute top-0 left-0 z-0"
+                        className="absolute bottom-0 left-0 z-0"
                         style={{
                           width: '100%',
                           height: '100%',
-                          clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                          clipPath: 'polygon(0 0, 0 100%, 100% 100%)',
                         }}
                       >
-                        {/* Left Text */}
-                        <div className="absolute top-3 left-3 z-10">
-                          <h3 
-                            className="text-lg font-bold"
-                            style={{ color: '#f5f3f8' }}
-                          >
-                            {feature.leftText}
-                          </h3>
-                        </div>
-                        
                         {/* Left Image - fills the triangle */}
                         <img
                           src={feature.leftImage}
                           alt={feature.leftText}
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{
-                            clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                            clipPath: 'polygon(0 0, 0 100%, 100% 100%)',
                           }}
                           onError={(e) => {
                             e.target.style.display = 'none'
@@ -119,32 +109,22 @@ function Features() {
                         />
                       </div>
 
-                      {/* Right Side - Bottom Triangle */}
+                      {/* Right Side - Top Triangle */}
                       <div 
-                        className="absolute bottom-0 right-0 z-0"
+                        className="absolute top-0 right-0 z-0"
                         style={{
                           width: '100%',
                           height: '100%',
-                          clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+                          clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
                         }}
                       >
-                        {/* Right Text */}
-                        <div className="absolute top-3 right-3 z-10">
-                          <h3 
-                            className="text-lg font-bold"
-                            style={{ color: '#f5f3f8' }}
-                          >
-                            {feature.rightText}
-                          </h3>
-                        </div>
-                        
                         {/* Right Image - fills the triangle */}
                         <img
                           src={feature.rightImage}
                           alt={feature.rightText}
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{
-                            clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+                            clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
                           }}
                           onError={(e) => {
                             e.target.style.display = 'none'
@@ -186,6 +166,24 @@ function Features() {
                   }}
                 />
               </div>
+              
+              {/* Text Labels Below Box - only for diagonal features */}
+              {feature.hasDiagonal && (
+                <div className="flex justify-between items-center px-2 pt-3">
+                  <h3 
+                    className="text-lg font-bold"
+                    style={{ color: '#f5f3f8' }}
+                  >
+                    {feature.leftText}
+                  </h3>
+                  <h3 
+                    className="text-lg font-bold"
+                    style={{ color: '#f5f3f8' }}
+                  >
+                    {feature.rightText}
+                  </h3>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
