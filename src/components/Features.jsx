@@ -71,16 +71,16 @@ function Features() {
                   <>
                     {/* Diagonal Split Layout */}
                     <div className="relative min-h-[300px] w-full">
-                      {/* Diagonal Line - goes from top-left to bottom-right */}
+                      {/* Diagonal Line - goes from bottom-left to top-right */}
                       <svg
                         className="absolute inset-0 w-full h-full z-20 pointer-events-none"
                         style={{ overflow: 'visible' }}
                       >
                         <line
                           x1="0"
-                          y1="0"
+                          y1="100%"
                           x2="100%"
-                          y2="100%"
+                          y2="0"
                           stroke="rgba(153, 102, 204, 0.6)"
                           strokeWidth="2"
                         />
