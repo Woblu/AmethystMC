@@ -86,7 +86,7 @@ function Features() {
                         />
                       </svg>
 
-                      {/* Left Side - Top Triangle */}
+                      {/* Left Side - Top Triangle (above diagonal) */}
                       <div 
                         className="absolute top-0 left-0 z-0"
                         style={{
@@ -95,61 +95,61 @@ function Features() {
                           clipPath: 'polygon(0 0, 100% 0, 0 100%)',
                         }}
                       >
-                        {/* Left Description Text */}
-                        <div className="absolute top-3 left-3 z-10 max-w-[45%]">
-                          <p 
-                            className="text-sm leading-relaxed"
-                            style={{ color: '#f5f3f8' }}
-                          >
-                            {feature.leftDescription}
-                          </p>
-                        </div>
-                        
                         {/* Left Image - fills the triangle */}
                         <img
                           src={feature.leftImage}
                           alt=""
                           className="absolute inset-0 w-full h-full object-cover"
-                          style={{
-                            clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                          }}
                           onError={(e) => {
                             e.target.style.display = 'none'
                           }}
                         />
                       </div>
 
-                      {/* Right Side - Bottom Triangle */}
+                      {/* Right Side - Bottom Triangle (below diagonal) */}
                       <div 
-                        className="absolute bottom-0 right-0 z-0"
+                        className="absolute top-0 right-0 z-0"
                         style={{
                           width: '100%',
                           height: '100%',
                           clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
                         }}
                       >
-                        {/* Right Description Text */}
-                        <div className="absolute top-3 right-3 z-10 max-w-[45%] text-right">
-                          <p 
-                            className="text-sm leading-relaxed"
-                            style={{ color: '#f5f3f8' }}
-                          >
-                            {feature.rightDescription}
-                          </p>
-                        </div>
-                        
                         {/* Right Image - fills the triangle */}
                         <img
                           src={feature.rightImage}
                           alt=""
                           className="absolute inset-0 w-full h-full object-cover"
-                          style={{
-                            clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
-                          }}
                           onError={(e) => {
                             e.target.style.display = 'none'
                           }}
                         />
+                      </div>
+
+                      {/* Left Description Text - above everything */}
+                      <div className="absolute top-3 left-3 z-30 max-w-[45%]">
+                        <p 
+                          className="text-sm leading-relaxed drop-shadow-lg"
+                          style={{ 
+                            color: '#f5f3f8',
+                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
+                          }}
+                        >
+                          {feature.leftDescription}
+                        </p>
+                      </div>
+
+                      {/* Right Description Text - above everything */}
+                      <div className="absolute bottom-3 right-3 z-30 max-w-[45%] text-right">
+                        <p 
+                          className="text-sm leading-relaxed drop-shadow-lg"
+                          style={{ 
+                            color: '#f5f3f8',
+                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
+                          }}
+                        >
+                          {feature.rightDescription}
+                        </p>
                       </div>
                     </div>
                   </>
