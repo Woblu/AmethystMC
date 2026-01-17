@@ -7,7 +7,9 @@ const features = [
     icon: '📦',
     hasDiagonal: true,
     leftImage: '/modrinth.png',
-    rightImage: '/curseforge.png'
+    rightImage: '/curseforge.png',
+    leftText: 'Modrinth',
+    rightText: 'CurseForge'
   },
   {
     title: 'Java & Bedrock Support',
@@ -15,7 +17,9 @@ const features = [
     icon: '🎮',
     hasDiagonal: true,
     leftImage: '/java.png',
-    rightImage: '/bedrock.png'
+    rightImage: '/bedrock.png',
+    leftText: 'Java Edition',
+    rightText: 'Bedrock Edition'
   },
   {
     title: 'Amethyst Client',
@@ -57,7 +61,7 @@ function Features() {
               className="relative group"
             >
               <div
-                className="h-full backdrop-blur-md rounded-lg p-6 transition-all duration-300 overflow-hidden"
+                className={`h-full backdrop-blur-md rounded-lg transition-all duration-300 overflow-hidden ${feature.hasDiagonal ? 'p-0' : 'p-6'}`}
                 style={{
                   backgroundColor: '#15102c',
                   border: '1px solid rgba(153, 102, 204, 0.2)',
@@ -66,10 +70,10 @@ function Features() {
                 {feature.hasDiagonal ? (
                   <>
                     {/* Diagonal Split Layout */}
-                    <div className="relative h-full min-h-[300px]">
-                      {/* Diagonal Line */}
+                    <div className="relative h-full min-h-[300px] w-full">
+                      {/* Diagonal Line - goes from corner to corner */}
                       <svg
-                        className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+                        className="absolute inset-0 w-full h-full z-20 pointer-events-none"
                         style={{ overflow: 'visible' }}
                       >
                         <line
@@ -82,51 +86,70 @@ function Features() {
                         />
                       </svg>
 
-                      {/* Left Side - Top Left */}
-                      <div className="absolute top-0 left-0 w-1/2 h-1/2 p-4 flex items-center justify-center">
-                        <div className="w-full h-full flex items-center justify-center">
-                          <img
-                            src={feature.leftImage}
-                            alt=""
-                            className="max-w-full max-h-full object-contain opacity-80"
-                            onError={(e) => {
-                              e.target.style.display = 'none'
-                            }}
-                          />
+                      {/* Left Side - Top Triangle */}
+                      <div 
+                        className="absolute top-0 left-0 z-0"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                        }}
+                      >
+                        {/* Left Text */}
+                        <div className="absolute top-3 left-3 z-10">
+                          <h3 
+                            className="text-lg font-bold"
+                            style={{ color: '#f5f3f8' }}
+                          >
+                            {feature.leftText}
+                          </h3>
                         </div>
-                      </div>
-
-                      {/* Right Side - Bottom Right */}
-                      <div className="absolute bottom-0 right-0 w-1/2 h-1/2 p-4 flex items-center justify-center">
-                        <div className="w-full h-full flex items-center justify-center">
-                          <img
-                            src={feature.rightImage}
-                            alt=""
-                            className="max-w-full max-h-full object-contain opacity-80"
-                            onError={(e) => {
-                              e.target.style.display = 'none'
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Content Area - Bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 pt-4">
-                        {/* Title */}
-                        <h3 
-                          className="text-2xl font-bold mb-2"
-                          style={{ color: '#f5f3f8' }}
-                        >
-                          {feature.title}
-                        </h3>
                         
-                        {/* Description */}
-                        <p 
-                          className="text-sm leading-relaxed"
-                          style={{ color: '#b09ecf' }}
-                        >
-                          {feature.description}
-                        </p>
+                        {/* Left Image - fills the triangle */}
+                        <img
+                          src={feature.leftImage}
+                          alt={feature.leftText}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          style={{
+                            clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                          }}
+                          onError={(e) => {
+                            e.target.style.display = 'none'
+                          }}
+                        />
+                      </div>
+
+                      {/* Right Side - Bottom Triangle */}
+                      <div 
+                        className="absolute bottom-0 right-0 z-0"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+                        }}
+                      >
+                        {/* Right Text */}
+                        <div className="absolute top-3 right-3 z-10">
+                          <h3 
+                            className="text-lg font-bold"
+                            style={{ color: '#f5f3f8' }}
+                          >
+                            {feature.rightText}
+                          </h3>
+                        </div>
+                        
+                        {/* Right Image - fills the triangle */}
+                        <img
+                          src={feature.rightImage}
+                          alt={feature.rightText}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          style={{
+                            clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+                          }}
+                          onError={(e) => {
+                            e.target.style.display = 'none'
+                          }}
+                        />
                       </div>
                     </div>
                   </>
