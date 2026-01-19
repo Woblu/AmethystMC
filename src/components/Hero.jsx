@@ -125,8 +125,8 @@ function Hero() {
         >
           {/* Download Button */}
           <motion.a
-            href="https://github.com/Woblu/Amethyst-Launcher/releases/download/v1.4.0/Amethyst.Launcher.Setup.1.4.0.exe"
-            download="Amethyst.Launcher.Setup.1.4.0.exe"
+            href="https://github.com/Woblu/Amethyst-Launcher/releases/download/v1.5.0/Amethyst.Launcher.v1.5.0.exe"
+            download="Amethyst.Launcher.v1.5.0.exe"
             whileHover={{ 
               scale: 1.02,
             }}
