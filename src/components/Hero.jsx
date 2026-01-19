@@ -131,7 +131,7 @@ function Hero() {
               scale: 1.02,
             }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-base uppercase tracking-wide transition-all duration-200 cursor-pointer no-underline hover:from-purple-500 hover:to-purple-600"
+            className="flex flex-1 items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-base uppercase tracking-wide transition-all duration-200 cursor-pointer no-underline hover:from-purple-500 hover:to-purple-600"
           >
             <svg 
               className="w-5 h-5" 
@@ -158,7 +158,7 @@ function Hero() {
               scale: 1.02,
             }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-700 to-purple-800 text-white font-bold text-base uppercase tracking-wide transition-all duration-200 cursor-pointer no-underline hover:from-purple-600 hover:to-purple-700"
+            className="flex flex-1 items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-700 to-purple-800 text-white font-bold text-base uppercase tracking-wide transition-all duration-200 cursor-pointer no-underline hover:from-purple-600 hover:to-purple-700"
           >
             <svg 
               className="w-5 h-5" 
