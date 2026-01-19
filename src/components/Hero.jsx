@@ -1,6 +1,53 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 function Hero() {
+  const [downloadUrl, setDownloadUrl] = useState(null)
+  const [downloadFilename, setDownloadFilename] = useState('Amethyst.Launcher.exe')
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchLatestRelease = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/Woblu/Amethyst-Launcher/releases/latest')
+        if (!response.ok) {
+          throw new Error('Failed to fetch latest release')
+        }
+        const data = await response.json()
+        
+        // Find the setup file (look for .exe files, prioritizing setup/installer names)
+        const setupAsset = data.assets.find(asset => {
+          const name = asset.name.toLowerCase()
+          return name.endsWith('.exe') && (
+            name.includes('setup') || 
+            name.includes('installer') || 
+            name.includes('amethyst')
+          )
+        }) || data.assets.find(asset => asset.name.endsWith('.exe'))
+        
+        if (setupAsset) {
+          setDownloadUrl(setupAsset.browser_download_url)
+          setDownloadFilename(setupAsset.name)
+        } else {
+          // Fallback to the release zip if no exe found
+          const zipAsset = data.assets.find(asset => asset.name.endsWith('.zip'))
+          if (zipAsset) {
+            setDownloadUrl(zipAsset.browser_download_url)
+            setDownloadFilename(zipAsset.name)
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching latest release:', error)
+        // Fallback to a default URL if API fails
+        setDownloadUrl('https://github.com/Woblu/Amethyst-Launcher/releases/latest')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchLatestRelease()
+  }, [])
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {/* Background Image with Overlay */}
@@ -125,28 +172,45 @@ function Hero() {
         >
           {/* Download Button */}
           <motion.a
-            href="https://github.com/Woblu/Amethyst-Launcher/releases/download/v1.5.0/Amethyst.Launcher.v1.5.0.exe"
-            download="Amethyst.Launcher.v1.5.0.exe"
+            href={downloadUrl || 'https://github.com/Woblu/Amethyst-Launcher/releases/latest'}
+            download={downloadUrl ? downloadFilename : undefined}
             whileHover={{ 
               scale: 1.02,
             }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-base uppercase tracking-wide transition-all duration-200 cursor-pointer no-underline hover:from-purple-500 hover:to-purple-600 w-40"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-base uppercase tracking-wide transition-all duration-200 cursor-pointer no-underline hover:from-purple-500 hover:to-purple-600 w-40 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading}
           >
-            <svg 
-              className="w-6 h-6 flex-shrink-0" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" 
-              />
-            </svg>
-            Download
+            {isLoading ? (
+              <svg 
+                className="w-6 h-6 flex-shrink-0 animate-spin" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
+                />
+              </svg>
+            ) : (
+              <svg 
+                className="w-6 h-6 flex-shrink-0" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" 
+                />
+              </svg>
+            )}
+            {isLoading ? 'Loading...' : 'Download'}
           </motion.a>
 
           {/* Source Button */}
